@@ -29,7 +29,7 @@ def rain_check() -> bool:
 
 def send_message(rain):
     TELEGRAM_TOKEN = os.environ.get('TELEGRAM_API_KEY')
-    CHAT_ID = os.environ["CHAT_ID"]
+    CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
     text = 'gonna rain gng. 🫩' if rain else 'no rain today bby. see u tonight 😘'
 
