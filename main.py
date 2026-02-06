@@ -17,7 +17,7 @@ def rain_check() -> bool:
         'appid': WEATHER_API_KEY,
         'cnt': 4,
     }
-    response = requests.get('https://api.openweathermap.org/data/2.5/forecast', params=weather_params)
+    response = requests.get('https://api.openweathermap.org/data/2.5/forecast', params=weather_params, timeout=20)
     response.raise_for_status()
     weather_data = response.json()
 
@@ -29,7 +29,7 @@ def rain_check() -> bool:
 
 def send_message(rain):
     TELEGRAM_TOKEN = os.environ.get('TELEGRAM_API_KEY')
-    CHAT_ID = '8556884992'
+    CHAT_ID = os.environ["CHAT_ID"]
 
     text = 'gonna rain gng. 🫩' if rain else 'no rain today bby. see u tonight 😘'
 
@@ -39,9 +39,8 @@ def send_message(rain):
         'text': text
     }
 
-    response = requests.post(url, data=payload)
+    response = requests.post(url, json=payload, timeout=20)
     response.raise_for_status()
-    data = response.json()
 
 
 
